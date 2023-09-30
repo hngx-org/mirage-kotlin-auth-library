@@ -87,7 +87,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             TextField(
                 value = name,
                 label = {
-                    Text(text = "Name")
+                    Text(text = "Names")
                 },
                 onValueChange = { name = it },
                 modifier = Modifier.fillMaxWidth(),
@@ -176,7 +176,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                                 // Handle successful signup
                                 val user = result
                                 Log.d("login succ",user.toString())
-//                                Toast.makeText(context, "Signup successful: ${user.data.name}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Signup successful: ${user.data}", Toast.LENGTH_SHORT).show()
                             }
 
                             is ApiResponse.Error -> {
