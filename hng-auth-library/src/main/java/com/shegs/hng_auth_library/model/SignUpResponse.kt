@@ -1,9 +1,9 @@
 package com.shegs.hng_auth_library.model
 
-data class AuthResponse(
+data class SignupResponse(
     val data: UserData,
     val message: String,
-    val status: String? = ""
+    val status: String
 )
 
 data class UserData(
