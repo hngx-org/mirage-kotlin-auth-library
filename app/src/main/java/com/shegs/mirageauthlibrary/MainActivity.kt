@@ -1,6 +1,7 @@
 package com.shegs.mirageauthlibrary
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.shegs.hng_auth_library.ui.screens.LibraryButton
@@ -140,6 +142,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             )
 
             val coroutineScope = rememberCoroutineScope()
+            val context = LocalContext.current
 
             Button(
                 onClick = {
@@ -154,17 +157,20 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                             )
                         )
 
+
+
                         when (result) {
                             is ApiResponse.Success -> {
                                 // Handle successful signup
                                 val user = result.data
-                                // Proceed with user authentication or UI update
+                                Toast.makeText(context, "Signup successful: ${user.data.name}", Toast.LENGTH_SHORT).show()
                             }
 
                             is ApiResponse.Error -> {
                                 // Handle signup error
                                 val errorMessage = result.message
                                 // Display error message to the user
+                                Toast.makeText(context, "Signup successful: $errorMessage", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
