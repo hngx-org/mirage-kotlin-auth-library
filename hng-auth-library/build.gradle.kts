@@ -44,6 +44,7 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
@@ -59,4 +60,13 @@ dependencies {
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
+
+    //Preferences datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+
+    //Icons Extended
+    implementation("androidx.compose.material:material-icons-extended:1.4.3")
+    implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha12")
+
 }
