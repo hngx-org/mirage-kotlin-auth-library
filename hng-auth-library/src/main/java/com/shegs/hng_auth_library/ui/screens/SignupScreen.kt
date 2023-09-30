@@ -147,7 +147,7 @@ fun SignInScreen() {
 
             }
             item {
-                val passwordVisibility by remember {
+                var passwordVisibility by remember {
                     mutableStateOf(false)
                 }
                 TextFieldHeaderText(text = "Confirm Password")
@@ -158,6 +158,14 @@ fun SignInScreen() {
                         keyboardType = KeyboardType.Password,
                         imeAction = ImeAction.Done
                     ),
+                    trailingIcon = {
+                        val icon =
+                            if (passwordVisibility) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
+
+                        IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                            Icon(imageVector = icon, contentDescription = null)
+                        }
+                    },
                     keyboardActions = KeyboardActions(
                         onNext = {
                             focusManager.moveFocus(FocusDirection.Next)
