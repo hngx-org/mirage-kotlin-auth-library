@@ -1,6 +1,7 @@
 package com.shegs.mirageauthlibrary
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,7 +31,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.shegs.hng_auth_library.authlibrary.AuthLibrary
-import com.shegs.hng_auth_library.model.SignupRequest
+import com.shegs.hng_auth_library.model.LoginRequest
 import com.shegs.hng_auth_library.network.ApiResponse
 import com.shegs.mirageauthlibrary.ui.theme.MirageAuthLibraryTheme
 import kotlinx.coroutines.launch
@@ -54,6 +55,7 @@ class MainActivity : ComponentActivity() {
 
 val authService = AuthLibrary.createAuthService()
 val signupRepository = AuthLibrary.createSignupRepository(authService)
+val loginRepository = AuthLibrary.createLoginRepository(authService)
 
 
 
@@ -145,27 +147,38 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 onClick = {
                     // This code will be executed when the button is clicked
                     coroutineScope.launch {
-                        val result = signupRepository.signup(
-                            SignupRequest(
-                                name = name,
+//                        val result = signupRepository.signup(
+//                            SignupRequest(
+//                                name = name,
+//                                email = email,
+//                                password = password,
+//                                confirm_password = confirm_password
+//                            )
+//                        )
+
+                        val result = loginRepository.login(
+                            LoginRequest(
                                 email = email,
                                 password = password,
-                                confirm_password = confirm_password
                             )
                         )
+
+
 
 
 
                         when (result) {
                             is ApiResponse.Success -> {
                                 // Handle successful signup
-                                val user = result.data
-                                Toast.makeText(context, "Signup successful: ${user.data.name}", Toast.LENGTH_SHORT).show()
+                                val user = result
+                                Log.d("login succ",user.toString())
+//                                Toast.makeText(context, "Signup successful: ${user.data.name}", Toast.LENGTH_SHORT).show()
                             }
 
                             is ApiResponse.Error -> {
                                 // Handle signup error
                                 val errorMessage = result.message
+                                Log.d("login err",errorMessage)
                                 // Display error message to the user
                                 Toast.makeText(context, "Signup successful: $errorMessage", Toast.LENGTH_SHORT).show()
                             }
