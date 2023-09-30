@@ -1,7 +1,7 @@
-package com.shegs.hng_auth_library.ui.screens.network
+package com.shegs.hng_auth_library.network
 
-import com.shegs.hng_auth_library.ui.screens.model.SignupRequest
-import com.shegs.hng_auth_library.ui.screens.model.SignupResponse
+import com.shegs.hng_auth_library.model.SignupRequest
+import com.shegs.hng_auth_library.model.SignupResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

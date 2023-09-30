@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -27,14 +26,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.shegs.hng_auth_library.ui.screens.LibraryButton
-import com.shegs.hng_auth_library.ui.screens.authlibrary.AuthLibrary
-import com.shegs.hng_auth_library.ui.screens.model.SignupRequest
-import com.shegs.hng_auth_library.ui.screens.network.ApiResponse
+import com.shegs.hng_auth_library.authlibrary.AuthLibrary
+import com.shegs.hng_auth_library.model.SignupRequest
+import com.shegs.hng_auth_library.network.ApiResponse
 import com.shegs.mirageauthlibrary.ui.theme.MirageAuthLibraryTheme
 import kotlinx.coroutines.launch
 
@@ -183,17 +180,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             }
 
 
-
-
-            Text(
-                text = "$name!",
-                modifier = modifier
-            )
-            LibraryButton(
-                onClick = {},
-                texts = "Checking",
-                buttonColors = ButtonDefaults.buttonColors(containerColor = Color.Magenta)
-            )
+            //SignInScreen()
         }
     }
 }

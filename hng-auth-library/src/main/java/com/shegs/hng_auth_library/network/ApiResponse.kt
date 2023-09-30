@@ -1,4 +1,4 @@
-package com.shegs.hng_auth_library.ui.screens.network
+package com.shegs.hng_auth_library.network
 
 sealed class ApiResponse<out T> {
     data class Success<out T>(val data: T) : ApiResponse<T>()

@@ -1,9 +1,9 @@
-package com.shegs.hng_auth_library.ui.screens.repositories
+package com.shegs.hng_auth_library.repositories
 
-import com.shegs.hng_auth_library.ui.screens.model.SignupRequest
-import com.shegs.hng_auth_library.ui.screens.model.SignupResponse
-import com.shegs.hng_auth_library.ui.screens.network.ApiResponse
-import com.shegs.hng_auth_library.ui.screens.network.ApiService
+import com.shegs.hng_auth_library.model.SignupRequest
+import com.shegs.hng_auth_library.model.SignupResponse
+import com.shegs.hng_auth_library.network.ApiResponse
+import com.shegs.hng_auth_library.network.ApiService
 
 class SignupRepository(private val apiService: ApiService) {
     suspend fun signup(signupRequest: SignupRequest): ApiResponse<SignupResponse> {

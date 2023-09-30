@@ -1,4 +1,4 @@
-package com.shegs.hng_auth_library.ui.common
+package com.shegs.hng_auth_library.common
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape

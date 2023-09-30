@@ -1,7 +1,7 @@
-package com.shegs.hng_auth_library.ui.screens.authlibrary
+package com.shegs.hng_auth_library.authlibrary
 
-import com.shegs.hng_auth_library.ui.screens.network.ApiService
-import com.shegs.hng_auth_library.ui.screens.repositories.SignupRepository
+import com.shegs.hng_auth_library.network.ApiService
+import com.shegs.hng_auth_library.repositories.SignupRepository
 
 object AuthLibrary {
     fun createAuthService(): ApiService {

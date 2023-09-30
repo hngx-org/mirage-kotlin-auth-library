@@ -1,4 +1,4 @@
-package com.shegs.hng_auth_library.ui.screens.network
+package com.shegs.hng_auth_library.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

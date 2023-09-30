@@ -1,4 +1,4 @@
-package com.shegs.hng_auth_library.ui.common
+package com.shegs.hng_auth_library.common
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -10,16 +10,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.shegs.hng_auth_library.R
 
-
 @Composable
-fun SubtitleText(text: String) {
+fun TextFieldHeaderText(text: String) {
     Text(
         text = text,
         style = TextStyle(
-            fontSize = 14.sp,
+            fontSize = 16.sp,
             fontFamily = FontFamily(Font(R.font.inter_regular)),
-            fontWeight = FontWeight(500),
-            color = Color(0xCC000000),
+            fontWeight = FontWeight(400),
+            color = Color(0xFF000000),
         )
     )
 }

@@ -1,4 +1,4 @@
-package com.shegs.hng_auth_library.ui.screens.model
+package com.shegs.hng_auth_library.model
 
 data class SignupRequest(
     val name: String,
