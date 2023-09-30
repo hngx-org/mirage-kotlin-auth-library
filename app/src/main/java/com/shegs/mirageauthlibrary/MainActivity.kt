@@ -37,6 +37,7 @@ import com.shegs.mirageauthlibrary.ui.theme.MirageAuthLibraryTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -53,15 +54,18 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-val authService = AuthLibrary.createAuthService()
-val signupRepository = AuthLibrary.createSignupRepository(authService)
-val loginRepository = AuthLibrary.createLoginRepository(authService)
 
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+
+    val authService = AuthLibrary.createAuthService()
+    val signupRepository = AuthLibrary.createSignupRepository(authService)
+    val dataStoreRepository = AuthLibrary.createDataStoreRepository(context = LocalContext.current)
+    val loginRepository = AuthLibrary.createLoginRepository(authService, dataStoreRepository)
+
 
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
