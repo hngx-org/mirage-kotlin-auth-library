@@ -16,6 +16,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,11 +31,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,14 +52,6 @@ import com.shegs.hng_auth_library.ui.common.LibraryButton
 import com.shegs.hng_auth_library.ui.common.RoundedTextField
 import com.shegs.hng_auth_library.ui.common.SubtitleText
 import com.shegs.hng_auth_library.ui.common.TextFieldHeaderText
-
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
-import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -70,6 +70,7 @@ fun SignInScreen() {
     }
     Scaffold(
     ) {
+        val focusManager = LocalFocusManager.current
         LazyColumn(
             modifier = Modifier.padding(start = 34.dp, end = 34.dp)
         ) {
@@ -93,6 +94,9 @@ fun SignInScreen() {
                 TextFieldHeaderText(text = "Full Name")
                 RoundedTextField(
                     value = fullName,
+                    visualTransformation = null,
+                    keyboardActions = null,
+                    keyboardOptions = null,
                     placeHolderText = "FirstName and LastName",
                     onValueChange = {})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
@@ -102,6 +106,10 @@ fun SignInScreen() {
                 TextFieldHeaderText(text = "Email")
                 RoundedTextField(
                     value = email,
+                    visualTransformation = null,
+                    keyboardActions = null,
+                    keyboardOptions = null,
+
                     placeHolderText = "Email Address",
                     onValueChange = {})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
@@ -139,9 +147,22 @@ fun SignInScreen() {
 
             }
             item {
+                val passwordVisibility by remember {
+                    mutableStateOf(false)
+                }
                 TextFieldHeaderText(text = "Confirm Password")
                 RoundedTextField(
                     value = password,
+                    visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = {
+                            focusManager.moveFocus(FocusDirection.Next)
+                        }
+                    ),
                     placeHolderText = "Enter Password Again",
                     onValueChange = {})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))

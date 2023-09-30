@@ -10,15 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.sp
 import com.shegs.hng_auth_library.R
@@ -36,15 +33,13 @@ fun RoundedTextField(
     onValueChange: (String) -> Unit
 ) {
 
-    val focsManager = LocalFocusManager.current
+    val focusManager = LocalFocusManager.current
 
     OutlinedTextField(
         value = value,
-        visualTransformation = visualTransformation!!,
+        visualTransformation = visualTransformation ?: VisualTransformation.None,
         onValueChange = { onValueChange(it) },
         modifier = modifier,
-        keyboardOptions = keyboardOptions!!,
-        keyboardActions = keyboardActions!!,
         placeholder = {
             Text(
                 text = placeHolderText,
@@ -56,19 +51,9 @@ fun RoundedTextField(
                 )
             )
         },
-//        leadingIcon = {
-//            Icon(imageVector = icon, contentDescription = "")
-//        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text,
-            imeAction = ImeAction.Next
-        ),
+        keyboardOptions = keyboardOptions ?: KeyboardOptions.Default,
         trailingIcon = trailingIcon,
-        keyboardActions = KeyboardActions(
-            onNext = {
-                focsManager.moveFocus(FocusDirection.Next)
-            }
-        ),
+        keyboardActions = keyboardActions ?: KeyboardActions.Default,
         colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Transparent,
             containerColor = Color.White,
