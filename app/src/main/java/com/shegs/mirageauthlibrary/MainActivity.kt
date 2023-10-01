@@ -27,15 +27,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.shegs.hng_auth_library.authlibrary.AuthLibrary
+import com.shegs.hng_auth_library.model.LoginRequest
 import com.shegs.hng_auth_library.model.SignupRequest
 import com.shegs.hng_auth_library.network.ApiResponse
 import com.shegs.mirageauthlibrary.ui.theme.MirageAuthLibraryTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -45,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("The button is from the library")
+                    LoginScreen()
                 }
             }
         }
@@ -53,18 +54,22 @@ class MainActivity : ComponentActivity() {
 }
 
 val authService = AuthLibrary.createAuthService()
-val signupRepository = AuthLibrary.createSignupRepository(authService)
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun SignupScreen(modifier: Modifier = Modifier) {
+
+    val signupRepository = AuthLibrary.createSignupRepository(authService)
+
 
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirm_password by remember { mutableStateOf("") }
+
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -138,9 +143,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 )
             )
 
-            val coroutineScope = rememberCoroutineScope()
-            val context = LocalContext.current
-
             Button(
                 onClick = {
                     // This code will be executed when the button is clicked
@@ -153,9 +155,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                                 confirm_password = confirm_password
                             )
                         )
-
-
-
                         when (result) {
                             is ApiResponse.Success -> {
                                 // Handle successful signup
@@ -167,7 +166,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                                 // Handle signup error
                                 val errorMessage = result.message
                                 // Display error message to the user
-                                Toast.makeText(context, "Signup successful: $errorMessage", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Signup failed: $errorMessage", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -185,10 +184,97 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GreetingPreview() {
-    MirageAuthLibraryTheme {
-        Greeting("Androidd")
+fun LoginScreen(){
+
+    val context = LocalContext.current
+    val dataStoreRepository = AuthLibrary.createDataStoreRepository(context)
+    val loginRepository = AuthLibrary.createLoginRepository(authService, dataStoreRepository)
+
+    val coroutineScope = rememberCoroutineScope()
+
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        TextField(
+            value = email,
+            label = {
+                Text(text = "Email")
+            },
+            onValueChange = { email = it },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = androidx.compose.ui.text.input.ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { /* Focus on the next field */ }
+            )
+        )
+
+        TextField(
+            value = password,
+            label = {
+                Text(text = "Password")
+            },
+            onValueChange = { password = it },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = androidx.compose.ui.text.input.ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { /* Focus on the next field */ }
+            )
+        )
+
+        Button(
+            onClick = {
+                // This code will be executed when the button is clicked
+                coroutineScope.launch {
+                    val result = loginRepository.login(
+                        LoginRequest(
+                            email = email,
+                            password = password
+                        )
+                    )
+                    when (result) {
+                        is ApiResponse.Success -> {
+                            // Handle successful signup
+                            val user = result.data
+                            Toast.makeText(context, "Login successful: ${user.data.email}", Toast.LENGTH_SHORT).show()
+                        }
+
+                        is ApiResponse.Error -> {
+                            // Handle signup error
+                            val errorMessage = result.message
+                            // Display error message to the user
+                            Toast.makeText(context, "Login failed: $errorMessage", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text("Sign Up")
+        }
     }
+
+
 }
+
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    MirageAuthLibraryTheme {
+//        Greeting("Androidd")
+//    }
+//}

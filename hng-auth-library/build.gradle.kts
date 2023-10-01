@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
@@ -64,5 +64,7 @@ dependencies {
     //Icons Extended
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha12")
+
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
 }
