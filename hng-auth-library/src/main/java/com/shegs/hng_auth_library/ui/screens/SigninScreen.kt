@@ -56,11 +56,11 @@ import com.shegs.hng_auth_library.common.TextFieldHeaderText
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignInScreen(appName: String) {
-    val email by remember {
+    var email by remember {
         mutableStateOf("")
 
     }
-    val password by remember {
+    var password by remember {
         mutableStateOf("")
     }
     Scaffold(
@@ -92,10 +92,12 @@ fun SignInScreen(appName: String) {
                     value = email,
                     visualTransformation = null,
                     keyboardActions = null,
-                    keyboardOptions = null,
-
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Next,
+                        keyboardType = KeyboardType.Email
+                    ),
                     placeHolderText = "Email Address",
-                    onValueChange = {})
+                    onValueChange = {email = it})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
             }
@@ -121,12 +123,12 @@ fun SignInScreen(appName: String) {
                     ),
                     keyboardActions = KeyboardActions(
                         onNext = {
-                            focusManager.moveFocus(FocusDirection.Next)
+                            focusManager.moveFocus(FocusDirection.Down)
                         }
                     ),
                     value = password,
                     placeHolderText = "Enter Password",
-                    onValueChange = {})
+                    onValueChange = {password = it})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
             }
@@ -186,9 +188,7 @@ fun SignInScreen(appName: String) {
                     }
                 }
             }
-
-
-
+            
         }
     }
 }
