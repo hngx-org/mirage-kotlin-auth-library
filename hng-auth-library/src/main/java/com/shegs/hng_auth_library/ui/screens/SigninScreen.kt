@@ -1,7 +1,5 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.shegs.hng_auth_library.ui.screens
-
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -46,29 +44,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.shegs.hng_auth_library.R
 import com.shegs.hng_auth_library.common.HeaderText
 import com.shegs.hng_auth_library.common.LibraryButton
 import com.shegs.hng_auth_library.common.RoundedTextField
 import com.shegs.hng_auth_library.common.SubtitleText
 import com.shegs.hng_auth_library.common.TextFieldHeaderText
+import com.shegs.hng_auth_library.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun SignUpScreen() {
-    var fullName by remember {
-        mutableStateOf("")
-    }
+fun SignInScreen(appName: String) {
     var email by remember {
         mutableStateOf("")
 
     }
     var password by remember {
-        mutableStateOf("")
-    }
-    var confirmPassword by remember {
         mutableStateOf("")
     }
     Scaffold(
@@ -81,32 +73,18 @@ fun SignUpScreen() {
                 Spacer(modifier = Modifier.padding(vertical = 50.dp))
             }
             item {
-                HeaderText(text = "Let’s get you \nstarted")
+                HeaderText(text = "Welcome back to \n${appName}")
             }
             item {
                 Spacer(modifier = Modifier.padding(vertical = 6.dp))
             }
 
             item {
-                SubtitleText(text = "Your journey begins here. This will \nonly take a few minutes.")
+                SubtitleText(text = "Hello again! We’ve missed you.\n" +
+                        "Let’s dive you back in already.")
             }
             item {
                 Spacer(modifier = Modifier.padding(vertical = 40.dp))
-            }
-            item {
-                TextFieldHeaderText(text = "Full Name")
-                RoundedTextField(
-                    value = fullName,
-                    visualTransformation = null,
-                    keyboardActions = null,
-                    keyboardOptions = KeyboardOptions(
-                        imeAction = ImeAction.Next,
-                        keyboardType = KeyboardType.Text
-                    ),
-                    placeHolderText = "FirstName and LastName",
-                    onValueChange = {fullName = it})
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
-
             }
             item {
                 TextFieldHeaderText(text = "Email")
@@ -141,46 +119,16 @@ fun SignUpScreen() {
                     visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Next
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onNext = {
-                            focusManager.moveFocus(FocusDirection.Next)
-                        }
-                    ),
-                    value = password,
-                    placeHolderText = "Enter Password",
-                    onValueChange = {password = it})
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
-
-            }
-            item {
-                var passwordVisibility by remember {
-                    mutableStateOf(false)
-                }
-                TextFieldHeaderText(text = "Confirm Password")
-                RoundedTextField(
-                    value = confirmPassword,
-                    visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Password,
                         imeAction = ImeAction.Done
                     ),
-                    trailingIcon = {
-                        val icon =
-                            if (passwordVisibility) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
-
-                        IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
-                            Icon(imageVector = icon, contentDescription = null)
-                        }
-                    },
                     keyboardActions = KeyboardActions(
                         onNext = {
                             focusManager.moveFocus(FocusDirection.Down)
                         }
                     ),
-                    placeHolderText = "Enter Password Again",
-                    onValueChange = {confirmPassword = it})
+                    value = password,
+                    placeHolderText = "Enter Password",
+                    onValueChange = {password = it})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
             }
@@ -195,7 +143,7 @@ fun SignUpScreen() {
                     buttonColors = ButtonDefaults.buttonColors(
                         containerColor = Color.Black
                     ),
-                    text = "Register",
+                    text = "Login",
                     textStyle = TextStyle(
                         fontSize = 14.sp,
                         fontFamily = FontFamily(Font(R.font.inter_regular)),
@@ -218,7 +166,7 @@ fun SignUpScreen() {
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Text(
-                            text = "Have an account?",
+                            text = "Don't have an account?",
                             style = TextStyle(
                                 fontSize = 14.sp,
                                 fontFamily = FontFamily(Font(R.font.inter_regular)),
@@ -228,7 +176,7 @@ fun SignUpScreen() {
                         )
                         Spacer(modifier = Modifier.padding(horizontal = 2.dp))
                         Text(
-                            text = "Login",
+                            text = "Register",
                             modifier = Modifier.clickable {  },
                             style = TextStyle(
                                 fontSize = 14.sp,
@@ -241,14 +189,12 @@ fun SignUpScreen() {
                 }
             }
 
-
-
         }
     }
 }
 
 @Preview
 @Composable
-fun PreviewSignUpScreen() {
-    SignUpScreen()
+fun PreviewSignInScreen() {
+    SignInScreen(appName = "DidiApp")
 }

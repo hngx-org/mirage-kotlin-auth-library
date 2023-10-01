@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -62,9 +63,22 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
 
     //Icons Extended
-    implementation("androidx.compose.material:material-icons-extended:1.4.3")
+    implementation("androidx.compose.material:material-icons-extended:1.5.2")
     implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha12")
 
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.hngx-org"
+                artifactId = "hng-auth-library"
+                version = "1.0"
+            }
+        }
+    }
 }

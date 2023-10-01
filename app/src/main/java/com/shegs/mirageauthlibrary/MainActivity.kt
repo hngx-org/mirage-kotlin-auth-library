@@ -46,7 +46,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen()
+                    UserDataScreen()
+
                 }
             }
         }
@@ -58,7 +59,7 @@ val authService = AuthLibrary.createAuthService()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier) {
+fun SignupUi(modifier: Modifier = Modifier) {
 
     val signupRepository = AuthLibrary.createSignupRepository(authService)
 
