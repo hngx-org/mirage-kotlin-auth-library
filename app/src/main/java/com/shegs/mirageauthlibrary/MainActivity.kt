@@ -32,7 +32,7 @@ import com.shegs.hng_auth_library.authlibrary.AuthLibrary
 import com.shegs.hng_auth_library.model.LoginRequest
 import com.shegs.hng_auth_library.model.SignupRequest
 import com.shegs.hng_auth_library.network.ApiResponse
-import com.shegs.hng_auth_library.ui.screens.SignInScreen
+import com.shegs.hng_auth_library.ui.screens.SignUpScreen
 import com.shegs.mirageauthlibrary.ui.theme.MirageAuthLibraryTheme
 import kotlinx.coroutines.launch
 
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SignInScreen(appName = "ShegeApp")
+                    SignUpScreen()
 
                 }
             }
@@ -60,7 +60,7 @@ val authService = AuthLibrary.createAuthService()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier) {
+fun SignupUi(modifier: Modifier = Modifier) {
 
     val signupRepository = AuthLibrary.createSignupRepository(authService)
 

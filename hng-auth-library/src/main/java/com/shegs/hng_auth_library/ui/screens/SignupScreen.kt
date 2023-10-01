@@ -58,14 +58,17 @@ import com.shegs.hng_auth_library.common.TextFieldHeaderText
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignUpScreen() {
-    val fullName by remember {
+    var fullName by remember {
         mutableStateOf("")
     }
-    val email by remember {
+    var email by remember {
         mutableStateOf("")
 
     }
-    val password by remember {
+    var password by remember {
+        mutableStateOf("")
+    }
+    var confirmPassword by remember {
         mutableStateOf("")
     }
     Scaffold(
@@ -96,9 +99,12 @@ fun SignUpScreen() {
                     value = fullName,
                     visualTransformation = null,
                     keyboardActions = null,
-                    keyboardOptions = null,
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Next,
+                        keyboardType = KeyboardType.Text
+                    ),
                     placeHolderText = "FirstName and LastName",
-                    onValueChange = {})
+                    onValueChange = {fullName = it})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
             }
@@ -108,10 +114,12 @@ fun SignUpScreen() {
                     value = email,
                     visualTransformation = null,
                     keyboardActions = null,
-                    keyboardOptions = null,
-
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Next,
+                        keyboardType = KeyboardType.Email
+                    ),
                     placeHolderText = "Email Address",
-                    onValueChange = {})
+                    onValueChange = {email = it})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
             }
@@ -133,7 +141,7 @@ fun SignUpScreen() {
                     visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Done
+                        imeAction = ImeAction.Next
                     ),
                     keyboardActions = KeyboardActions(
                         onNext = {
@@ -142,7 +150,7 @@ fun SignUpScreen() {
                     ),
                     value = password,
                     placeHolderText = "Enter Password",
-                    onValueChange = {})
+                    onValueChange = {password = it})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
             }
@@ -152,7 +160,7 @@ fun SignUpScreen() {
                 }
                 TextFieldHeaderText(text = "Confirm Password")
                 RoundedTextField(
-                    value = password,
+                    value = confirmPassword,
                     visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,
@@ -168,11 +176,11 @@ fun SignUpScreen() {
                     },
                     keyboardActions = KeyboardActions(
                         onNext = {
-                            focusManager.moveFocus(FocusDirection.Next)
+                            focusManager.moveFocus(FocusDirection.Down)
                         }
                     ),
                     placeHolderText = "Enter Password Again",
-                    onValueChange = {})
+                    onValueChange = {confirmPassword = it})
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
             }
