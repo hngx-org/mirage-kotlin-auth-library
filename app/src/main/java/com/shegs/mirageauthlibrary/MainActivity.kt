@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.shegs.hng_auth_library.authlibrary.AuthLibrary
 import com.shegs.hng_auth_library.model.SignupRequest
 import com.shegs.hng_auth_library.network.ApiResponse
+import com.shegs.hng_auth_library.ui.screens.SignInScreen
 import com.shegs.mirageauthlibrary.ui.theme.MirageAuthLibraryTheme
 import kotlinx.coroutines.launch
 
@@ -45,7 +46,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("The button is from the library")
+//                    Greeting("The button is from the library")
+                    SignInScreen(appName = "DidiApp")
                 }
             }
         }
