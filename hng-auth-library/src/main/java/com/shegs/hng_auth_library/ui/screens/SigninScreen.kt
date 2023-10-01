@@ -188,7 +188,7 @@ fun SignInScreen(appName: String) {
                     }
                 }
             }
-            
+
         }
     }
 }
