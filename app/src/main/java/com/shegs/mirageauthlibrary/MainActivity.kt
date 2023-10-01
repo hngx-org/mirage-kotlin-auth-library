@@ -189,6 +189,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     MirageAuthLibraryTheme {
-        Greeting("Android")
+        Greeting("Androidd")
     }
 }
