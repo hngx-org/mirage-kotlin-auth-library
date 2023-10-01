@@ -20,5 +20,4 @@ class ProfileRepository(
             ApiResponse.Error("Network error: ${e.message}")
         }
     }
-
 }
