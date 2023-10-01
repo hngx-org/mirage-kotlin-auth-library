@@ -4,6 +4,7 @@ import android.content.Context
 import com.shegs.hng_auth_library.network.ApiService
 import com.shegs.hng_auth_library.repositories.DataStoreRepository
 import com.shegs.hng_auth_library.repositories.LoginRepository
+import com.shegs.hng_auth_library.repositories.LogoutRepository
 import com.shegs.hng_auth_library.repositories.ProfileRepository
 import com.shegs.hng_auth_library.repositories.SignupRepository
 
@@ -31,6 +32,12 @@ object AuthLibrary {
         apiService: ApiService,
     ) : ProfileRepository {
         return ProfileRepository(apiService)
+    }
+
+    fun createLogoutRepository(
+        apiService: ApiService,
+    ) : LogoutRepository {
+        return LogoutRepository(apiService)
     }
 
 }
