@@ -44,12 +44,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.shegs.hng_auth_library.R
 import com.shegs.hng_auth_library.common.HeaderText
 import com.shegs.hng_auth_library.common.LibraryButton
 import com.shegs.hng_auth_library.common.RoundedTextField
 import com.shegs.hng_auth_library.common.SubtitleText
 import com.shegs.hng_auth_library.common.TextFieldHeaderText
+import com.shegs.hng_auth_library.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -67,4 +68,17 @@ dependencies {
 
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.hngx-org"
+                artifactId = "hng-auth-library"
+                version = "1.0"
+            }
+        }
+    }
 }
