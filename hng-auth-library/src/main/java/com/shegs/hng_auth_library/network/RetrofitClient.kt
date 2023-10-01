@@ -11,7 +11,6 @@ import java.util.*
 object RetrofitClient {
     private const val BASE_URL = "https://spitfire-openai.onrender.com/"
 
-    // Custom CookieJar implementation
     private val cookieJar = object : CookieJar {
         private val cookieStore = mutableMapOf<String, MutableList<Cookie>>()
 

@@ -1,15 +1,16 @@
 package com.shegs.hng_auth_library.repositories
 
-import com.shegs.hng_auth_library.model.AuthResponse
+import com.shegs.hng_auth_library.model.LogoutResponse
 import com.shegs.hng_auth_library.network.ApiResponse
 import com.shegs.hng_auth_library.network.ApiService
 
-class ProfileRepository(
+class LogoutRepository(
     private val apiService: ApiService,
 ) {
-    suspend fun profile(): ApiResponse<AuthResponse> {
+
+    suspend fun logout(): ApiResponse<LogoutResponse> {
         return try {
-            val response = apiService.profile()
+            val response = apiService.logout()
 
             if (response.isSuccessful) {
                 ApiResponse.Success(response.body()!!)
