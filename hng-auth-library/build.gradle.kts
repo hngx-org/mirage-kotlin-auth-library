@@ -4,6 +4,9 @@ plugins {
     id("maven-publish")
 }
 
+group = "com.github.jitpack"
+version = "1.0"
+
 android {
     namespace = "com.shegs.hng_auth_library"
     compileSdk = 34
