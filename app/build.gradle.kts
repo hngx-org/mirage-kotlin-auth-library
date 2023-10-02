@@ -1,8 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -42,7 +40,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.4.6"
     }
     packaging {
         resources {
@@ -78,15 +76,7 @@ dependencies {
     //Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.5")
 
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.45")
-    kapt("androidx.hilt:hilt-compiler:1.0.0-alpha01")
-
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
 
     implementation(project(":hng-auth-library"))
-}
-
-kapt {
-    correctErrorTypes = true
 }
