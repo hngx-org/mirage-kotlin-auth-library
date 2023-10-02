@@ -6,10 +6,9 @@ import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
 object RetrofitClient {
-    private const val BASE_URL = "https://spitfire-openai.onrender.com/"
+    private const val BASE_URL = "https://spitfire-interractions.onrender.com/"
 
     private val cookieJar = object : CookieJar {
         private val cookieStore = mutableMapOf<String, MutableList<Cookie>>()
