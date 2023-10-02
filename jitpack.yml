@@ -2,3 +2,10 @@ jdk:
   - openjdk17
 before_install:
   - ./scripts/prepareJitpackEnvironment.sh
+
+publish:
+  mavenCentral: true
+
+  groupId: com.github.hngx-org
+  artifactId: hng-auth-library
+  version: 1.0.0 
