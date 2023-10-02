@@ -1,5 +1,6 @@
 package com.shegs.mirageauthlibrary
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +13,13 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -44,6 +51,7 @@ fun UserDataScreen() {
 
         when (val result = profileRepository.profile()) {
             is ApiResponse.Success -> {
+                Log.d("API Response", "Profile API Response: ${result.data}")
                 userData = result.data
                 loading = false
                 Toast.makeText(context, "Fetch Profile success", Toast.LENGTH_SHORT).show()
