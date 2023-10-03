@@ -4,9 +4,6 @@ plugins {
     id("maven-publish")
 }
 
-group = "com.github.jitpack"
-version = "1.0"
-
 android {
     namespace = "com.shegs.hng_auth_library"
     compileSdk = 34
@@ -80,7 +77,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.hngx-org"
                 artifactId = "hng-auth-library"
-                version = "1.0"
+                version = "2.0"
             }
         }
     }
