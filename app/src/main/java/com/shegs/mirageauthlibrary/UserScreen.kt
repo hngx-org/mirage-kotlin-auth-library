@@ -28,6 +28,7 @@ import com.shegs.hng_auth_library.authlibrary.AuthLibrary
 import com.shegs.hng_auth_library.model.AuthResponse
 import com.shegs.hng_auth_library.model.LoginRequest
 import com.shegs.hng_auth_library.network.ApiResponse
+import com.shegs.hng_auth_library.network.RetrofitClient
 import kotlinx.coroutines.launch
 
 
@@ -40,10 +41,12 @@ fun UserDataScreen() {
     val coroutineScope = rememberCoroutineScope()
 
 
+
     val authService = AuthLibrary.createAuthService()
     val dataStoreRepository = AuthLibrary.createDataStoreRepository(context)
     val loginRepository = AuthLibrary.createLoginRepository(authService, dataStoreRepository)
 
+    var cookies: String = "";
 
     suspend fun fetchProfile() {
         loading = true
@@ -55,6 +58,8 @@ fun UserDataScreen() {
                 userData = result.data
                 loading = false
                 Toast.makeText(context, "Fetch Profile success", Toast.LENGTH_SHORT).show()
+                Log.d("Cookies", "Cookies value: $cookies")
+                cookies = RetrofitClient.getCookiesForUrl().toString()
             }
             is ApiResponse.Error -> {
                 loading = false
@@ -62,8 +67,6 @@ fun UserDataScreen() {
                 Toast.makeText(context, "Fetch Profile failed: $errorMessage", Toast.LENGTH_SHORT).show()
             }
         }
-
-
     }
 
     suspend fun load(){
@@ -77,8 +80,6 @@ fun UserDataScreen() {
             is ApiResponse.Error -> {
                 Toast.makeText(context, "Login failed:", Toast.LENGTH_SHORT).show()
             }
-
-
         }
     }
 
@@ -130,6 +131,7 @@ fun UserDataScreen() {
                     Text("Name: ${it.data.name}")
                     Text("Email: ${it.data.email}")
                     Text("Credits: ${it.data.credit}")
+                    Text("Cookie: $cookies")
                     Row {
                         Button(
                             onClick = {

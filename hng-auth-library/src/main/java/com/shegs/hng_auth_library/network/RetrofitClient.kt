@@ -3,6 +3,7 @@ package com.shegs.hng_auth_library.network
 import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,6 +21,12 @@ object RetrofitClient {
         override fun loadForRequest(url: HttpUrl): List<Cookie> {
             val cookies = cookieStore[url.host]
             return cookies ?: ArrayList()
+        }
+    }
+
+    fun getCookiesForUrl(): List<Cookie>? {
+        return BASE_URL.toHttpUrlOrNull()?.let {
+            cookieJar.loadForRequest(it)
         }
     }
 
