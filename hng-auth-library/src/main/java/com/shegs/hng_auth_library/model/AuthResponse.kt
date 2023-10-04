@@ -8,7 +8,7 @@ data class AuthResponse(
 
 data class UserData(
     val created_at: String,
-    val credit: Int,
+    val credits: Int,
     val email: String,
     val id: String,
     val name: String,

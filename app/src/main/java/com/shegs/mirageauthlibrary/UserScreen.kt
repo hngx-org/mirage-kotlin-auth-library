@@ -58,6 +58,10 @@ fun UserDataScreen() {
                 userData = result.data
                 loading = false
                 Toast.makeText(context, "Fetch Profile success", Toast.LENGTH_SHORT).show()
+
+                // Print credit value from the response
+                Log.d("Credit", "Credit value: ${result.data.data.credits}")
+
                 Log.d("Cookies", "Cookies value: $cookies")
                 cookies = RetrofitClient.getCookiesForUrl().toString()
             }
@@ -71,7 +75,7 @@ fun UserDataScreen() {
 
     suspend fun load(){
 
-        when(loginRepository.login(LoginRequest(email="test@mail.com", password = "password"))){
+        when(loginRepository.login(LoginRequest(email="name@gmail.com", password = "Qwerty@12"))){
             is ApiResponse.Success -> {
                 Toast.makeText(context, "Login successful: ", Toast.LENGTH_SHORT).show()
                 fetchProfile()
@@ -130,7 +134,7 @@ fun UserDataScreen() {
                 ) {
                     Text("Name: ${it.data.name}")
                     Text("Email: ${it.data.email}")
-                    Text("Credits: ${it.data.credit}")
+                    Text("Credits: ${it.data.credits}")
                     Text("Cookie: $cookies")
                     Row {
                         Button(
