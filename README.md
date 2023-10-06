@@ -2,11 +2,6 @@
 
 The AuthLibrary is a Kotlin library designed to simplify user authentication and related tasks in your Android or Kotlin-based project for the HNG Internship program. In this documentation, you will learn how to integrate and use the **AuthLibrary** in your project effectively.
 
-# What changed
-
-- In the previous version, the credit value always returns as zero. However, in this version, you will correctly get the credit value that a user has left.
-- Also, we are returning the cookie which can fetch it for usage in your application (You will find how to fetch it below)
-
 # Installation
 
 To use the AuthLibrary in your project, you need to include it as a dependency and also add the Maven Artifact Repository. You can do this by adding the following line to your project's **build.gradle** file (usually located in the **app** module):
